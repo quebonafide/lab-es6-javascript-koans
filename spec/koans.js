@@ -4,97 +4,104 @@ describe("`let` vs. `var`.", () => {
   it("the scope for `var` is not restricted to the block", () => {
     if (true) {
       /* use the correct keyword to initialize `varX` here */
+      var varX = true;
     }
-    // expect(varX).toBe(true);
+    expect(varX).toBe(true);
   });
 
   it("`let` restricts scope to inside the block", () => {
     /* initialize the variable `letX` */
+    let letX = false;
     /* here ? */
     if (true) {
       /* or here ? */
+      letX = true;
     }
-    // expect(letX).toBe(true);
+    expect(letX).toBe(true);
   });
 });
 
 describe("`const` is like `let` plus read-only. ", () => {
   it("primitives declared with `const` cannot be reassigned", () => {
     /*let or const? x = 0;*/
-    // expect(() => { x = 1; }).toThrow()
+    const x = 0;
+     expect(() => { x = 1; }).toThrow()
   });
   it("objects declared with `const` cannot be reassigned", () => {
     /*let or const? y = [1, 2, 3];*/
-    // expect(() => { y = [4, 5, 6]; }).toThrow()
+    const y = [1, 2, 3]
+    expect(() => { y = [4, 5, 6]; }).toThrow()
   });
 
   it("objects declared with `const` can still be mutated", () => {
     const arr = [42, 23];
     const obj = { x: 1 };
-
+    arr[0] = 0;
+    obj.x = 2;
     /* write your code here */
 
-    // expect(arr[0]).toBe(0);
-    // expect(obj.x).toBe(2);
+    expect(arr[0]).toBe(0);
+    expect(obj.x).toBe(2);
   });
 
   it("`const` scope leaks too", () => {
     /*`const`? notChangeable = 23;*/
+    const notChangeable = 23;
     if (true) {
-      // expect(notChangeable).toBe(23);
+     expect(notChangeable).toBe(23);
     }
   });
 });
 
 describe("`string.includes()` finds string within another string. ", () => {
   it("returns `true` if a character is found in a string", () => {
-    /* const char = ???? */
-    // expect('xyz'.includes(char)).toBe(true);
+   const char = 'xyz'
+    expect('xyz'.includes(char)).toBe(true);
   });
   it("returns `false` if character was not found", () => {
-    /* const char = ???? */
-    // expect('xyz'.includes(char)).toBe(false);
+    const char = 'a'
+    expect('xyz'.includes(char)).toBe(false);
   });
   it("returns `true` if a string is found in a string", () => {
-    /* const searchString = ???? */
-    // expect('Hello World'.includes(searchString)).toBe(true);
+    const searchString = 'Hello World'
+    expect('Hello World'.includes(searchString)).toBe(true);
   });
   it("returns `false` if string was not found", () => {
-    /* const searchString = ???? */
-    // expect('Hello World'.includes(searchString)).toBe(false);
+    const searchString = 'a' 
+    expect('Hello World'.includes(searchString)).toBe(false);
   });
 
   it("does not find `a` after position 1 in `abc`", () => {
-    /* const position = ???? */
-    // expect('abc'.includes('a', position)).toBe(false);
+    const position = 1;
+    expect('abc'.includes('a', position)).toBe(false);
   });
   it("even the position gets coerced", () => {
-    /* const position = ???? */
-    // expect(typeof position).toBe("string")
-    // expect('abc'.includes('c', position)).toBe(true);
+    const position = 'af'
+    expect(typeof position).toBe("string")
+    expect('abc'.includes('c', position)).toBe(true);
   });
   it("invalid positions get converted to 0`", () => {
-    /* let position = ???? */
-    // expect(position).toBeUndefined()
-    // expect('abc'.includes('a', position)).toBe(true);
+    let position = undefined;
+    expect(position).toBeUndefined()
+    expect('abc'.includes('a', position)).toBe(true);
   });
   it("negative numbers get converted to 0", () => {
-    /* const position = ???? */
-    // expect(position).toBeLessThan(0)
-    // expect('abc'.includes('a', position)).toBe(true);
+    const position = -1;
+    expect(position).toBeLessThan(0)
+    expect('abc'.includes('a', position)).toBe(true);
   });
   it("NaN", () => {
-    /* const position = ???? */
-    // expect(position).toBeNaN()
-    // expect('abc'.includes('a', position)).toBe(true);
+    const position = NaN;
+    expect(position).toBeNaN()
+    expect('abc'.includes('a', position)).toBe(true);
   });
 });
 
 describe("a template string, is wrapped in ` (backticks) instead of ' or \". ", () => {
   describe("by default, behaves like a normal string", function() {
     it("just surrounded by backticks", function() {
-      /* let str = ?????? */
-      // expect(str).toEqual('like a string');
+      let str = `like a string`
+      expect(str).toEqual('like a string');
     });
   });
 
